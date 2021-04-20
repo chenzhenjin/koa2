@@ -2,7 +2,7 @@
  * @Author: chenzhenjin
  * @email: BrotherStudy@163.com
  * @Date: 2020-09-23 17:26:03
- * @LastEditTime: 2020-10-23 17:36:50
+ * @LastEditTime: 2021-04-20 12:55:57
  * @Descripttion: 模块描述
  */
 const Koa = require("koa");
@@ -28,7 +28,8 @@ app.use(
       "os-type",
       "securitycode",
       "securityKey",
-      "token"
+      "token",
+      "source"
     ]
   })
 );

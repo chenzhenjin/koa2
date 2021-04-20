@@ -2,14 +2,16 @@
  * @Author: chenzhenjin
  * @email: BrotherStudy@163.com
  * @Date: 2020-09-23 17:26:03
- * @LastEditTime: 2020-10-23 18:55:02
+ * @LastEditTime: 2021-04-20 11:55:27
  * @Descripttion: 模块描述
  */
 const Router = require("koa-router");
+const exportList = require("../excel/index").exportList
 let reactMovie = new Router();
 let uniapp = new Router();
 let router = new Router();
 let trq = new Router();
+let rqb = new Router();
 const axios = require("axios");
 reactMovie
   .get("history", async (ctx) => {
@@ -57,7 +59,7 @@ uniapp
   });
 
 trq.get("copyClickTask", async (ctx) => {
-  console.log('有请求')
+  console.log("有请求");
   ctx.body = {
     code: 200,
     data: {
@@ -93,11 +95,32 @@ trq.get("copyClickTask", async (ctx) => {
       pttqzType: 6,
       maleRatio: 30,
     },
-    msg: null
+    msg: null,
   };
 });
+
+rqb.post("exprotToExcel", async (ctx) => {
+  console.log("导出excel有请求");
+  const config = [
+    {
+      name: "userid",
+      title: "用户ID",
+    }
+  ];
+  const listData = [
+    {
+      userid: '1',
+    },
+    {
+      userid: '2'
+    }
+  ]
+  exportList(ctx, config, listData, 'test')
+});
+
 router.use("/react/", reactMovie.routes(), reactMovie.allowedMethods());
 router.use("/uniapp/", uniapp.routes(), uniapp.allowedMethods());
 router.use("/trq/", trq.routes(), trq.allowedMethods());
+router.use("/rqb/", rqb.routes(), rqb.allowedMethods());
 
 module.exports = router;
